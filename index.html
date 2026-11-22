@@ -45,12 +45,16 @@
     </div>
 
     <main class="deep">
+      <h2>More on population dynamics</h2>
       <p class="intro">
         The map above presents two data layers simultaneously: total emissions and 
-        emissions per person for each country. China's total emissions growth
-        over the 1990–2024 timeline is most extreme. The figures below emphasize 
-        the difference between absolute and relative emissions.
-        Hover above any country to find it in every view. They all follow the
+        emissions per person for each country. However, it draws our attention
+        mostly to total emissions. While the largest total emittors are shifting from Europe
+        and the USA to India and China, total emissions does not account for pollution 
+        intensity across regions of very different sizes. The underlying lifestyles, 
+        energy, and economic patterns are better represented by emissions per capita.
+        The figures below more clearly emphasize how emissions per capita changes the 
+        carbon emissions story. Hover above any country to find it in every view. They all follow the
         year slider as well.
       </p>
 
@@ -75,6 +79,16 @@
           <p class="cap" id="rank-cap"></p>
         </section>
       </div>
+      
+      <p class="intro">
+      From 1990 t0 2024, we see a reduction in emissions per capita for countries like
+        the US, Russia, and Germany, while emissions per capita increase for countries like
+        India and China. This causes the figure to change shape from a definitive slope
+        to a more even spread. The causes of these changes include many complex factors, some
+        of which are related to changing economies and technologies. For example, China's 
+        industry has grown significantly, while electrification around the world has 
+        picked up.
+      </p>
 
       <section class="panel">
         <div class="cards" id="cards"></div>
@@ -144,9 +158,9 @@
       </div>
     </div>
 
-    <script src="data.js"></script>
-    <script src="engine.js"></script>
-    <script src="views.js"></script>
-    <script src="app.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/engine.js"></script>
+    <script src="js/views.js"></script>
+    <script src="js/app.js"></script>
   </body>
 </html>
