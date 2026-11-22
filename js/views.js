@@ -1,5 +1,5 @@
-// Linked views: population x per-person chart, "who changed most" ranking,
-// and a balanced two-rankings panel.
+// Linked views: population x per-person chart and a balanced
+// two-rankings panel.
 const YMAX = 40;
 const SHORT = {
   "United States of America": "US",
@@ -9,9 +9,7 @@ const SHORT = {
 const sn = n => SHORT[n] || n;
 
 const VW = {
-  metric: "total",
   hl: null,
-  last: "",
   lab: {},
   rect: []
 };
@@ -119,9 +117,6 @@ function initViews() {
     }
   });
 
-  $("m-total").onclick = () => setMetric("total");
-  $("m-pc").onclick = () => setMetric("pc");
-
   document.addEventListener("mouseover", e => {
     const el = e.target.closest && e.target.closest("[data-i]");
     setHl(el ? el.dataset.i : null);
@@ -145,20 +140,9 @@ function setHl(i) {
   }
 }
 
-function setMetric(m) {
-  VW.metric = m;
-  VW.last = "";
-
-  $("m-total").setAttribute("aria-pressed", m === "total");
-  $("m-pc").setAttribute("aria-pressed", m === "pc");
-
-  renderRank(VW.yf);
-}
-
 function renderViews(yf) {
   VW.yf = yf;
   renderMek(yf);
-  renderRank(yf);
   renderBal(Math.round(yf));
 }
 
@@ -256,75 +240,6 @@ function renderMek(yf) {
   }
 }
 
-function renderRank(yf) {
-  const y = Math.round(yf);
-  const key = y + VW.metric;
-
-  if (key === VW.last) return;
-  VW.last = key;
-
-  const tot = VW.metric === "total";
-  const yr = Y0 + y;
-
-  $("rank-h").textContent = tot
-    ? `Biggest changes in total emissions, 1990 to ${yr}`
-    : `Biggest changes in emissions per person, 1990 to ${yr}`;
-
-  $("rank-cap").textContent = tot
-    ? "Mt CO₂e. Six largest increases and six largest decreases."
-    : "Tonnes CO₂e per person. Countries with at least 5 million people.";
-
-  if (y === 0) {
-    $("rank").innerHTML =
-      '<p class="empty">This is the baseline year. Move the slider forward to see what changed.</p>';
-    return;
-  }
-
-  const rows = [];
-
-  VW.ix.forEach((i, k) => {
-    if (!tot && (VW.pop[k][0] < 5 || VW.pop[k][y] < 5)) return;
-
-    rows.push({
-      i,
-      v: tot
-        ? D[i].t[y] - D[i].t[0]
-        : D[i].p[y] - D[i].p[0]
-    });
-  });
-
-  rows.sort((a, b) => b.v - a.v);
-
-  const list = rows
-    .filter(r => r.v > 0)
-    .slice(0, 6)
-    .concat(rows.filter(r => r.v < 0).slice(-6));
-
-  const mx = Math.max(1e-9, ...list.map(r => Math.abs(r.v)));
-
-  $("rank").innerHTML = list
-    .map(r => {
-      const pos = r.v > 0;
-      const w = Math.abs(r.v) / mx * 50;
-
-      return (
-        `<div class="rr" data-i="${r.i}">` +
-        `<span class="rn">${sn(nm[r.i])}</span>` +
-        `<span class="rt"><i class="${pos ? "up" : "dn"}" ` +
-        `style="${pos ? "left" : "right"}:50%;width:${w}%"></i></span>` +
-        `<span class="rv">${pos ? "+" : "−"}${fmt(Math.abs(r.v), tot ? 0 : 1)}` +
-        `${tot ? " Mt" : " t"}</span>` +
-        "</div>"
-      );
-    })
-    .join("");
-
-  if (VW.hl !== null) {
-    const e = document.querySelector(`#rank [data-i="${VW.hl}"]`);
-    if (e) e.classList.add("on");
-  }
-}
-
 function renderBal(y) {
   if (VW.balY === y) return;
   VW.balY = y;
@@ -389,18 +304,6 @@ function renderBal(y) {
 
   const g = q => q[y] / q[0] - 1;
   const pcw = VW.tt.map((t, k) => t / VW.tp[k]);
-
-  $("read").innerHTML =
-    (both.length
-      ? `Of the ten largest emitters in ${Y0 + y}, ${both.length} ` +
-        `${both.length === 1 ? "is" : "are"} also among the ten highest per person ` +
-        `(${both.join(", ")}). `
-      : `In ${Y0 + y}, none of the ten largest emitters is also among the ten highest per person. `) +
-    (y === 0
-      ? "The two lists answer different questions: one is about the size of a country’s impact, the other about how much each of its people contributes."
-      : `Since 1990, total emissions across these countries changed by ` +
-        `<b>${pct(g(VW.tt))}</b>, population by <b>${pct(g(VW.tp))}</b>, ` +
-        `and emissions per person by <b>${pct(g(pcw))}</b>.`);
 
   if (VW.hl !== null) {
     const e = document.querySelector(`#cards [data-i="${VW.hl}"]`);

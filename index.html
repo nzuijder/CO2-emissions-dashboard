@@ -45,12 +45,12 @@
     </div>
 
     <main class="deep">
-      <h2>More on population dynamics</h2>
+      <h2>A different perspective</h2>
       <p class="intro">
         The map above presents two data layers simultaneously: total emissions and 
-        emissions per person for each country. However, it draws our attention
+        emissions per capita for each country. However, it draws our attention
         mostly to total emissions. While the largest total emittors are shifting from Europe
-        and the USA to India and China, total emissions does not account for pollution 
+        and the USA to India and China, total emissions does not account for emission 
         intensity across regions of very different sizes. The underlying lifestyles, 
         energy, and economic patterns are better represented by emissions per capita.
         The figures below more clearly emphasize how emissions per capita changes the 
@@ -58,36 +58,29 @@
         year slider as well.
       </p>
 
-      <div class="grid">
-        <section class="panel">
-          <h3>Population × emissions per person = total emissions</h3>
-          <svg
-            id="mek"
-            viewBox="0 0 900 340"
-            role="img"
-            aria-label="Bar chart where width is population and height is emissions per person"
-          ></svg>
-        </section>
+      <section class="panel">
+        <h3>Population × emissions per capita = total emissions</h3>
+        <svg
+          id="mek"
+          viewBox="0 0 900 340"
+          role="img"
+          aria-label="Bar chart where width is population and height is emissions per capita"
+        ></svg>
+      </section>
 
-        <section class="panel">
-          <h3 id="rank-h">Biggest changes</h3>
-          <div class="seg" role="group" aria-label="Measure">
-            <button id="m-total" aria-pressed="true">Total</button>
-            <button id="m-pc" aria-pressed="false">Per person</button>
-          </div>
-          <div id="rank"></div>
-          <p class="cap" id="rank-cap"></p>
-        </section>
-      </div>
-      
       <p class="intro">
-      From 1990 t0 2024, we see a reduction in emissions per capita for countries like
-        the US, Russia, and Germany, while emissions per capita increase for countries like
-        India and China. This causes the figure to change shape from a definitive slope
-        to a more even spread. The causes of these changes include many complex factors, some
-        of which are related to changing economies and technologies. For example, China's 
-        industry has grown significantly, while electrification around the world has 
-        picked up.
+      When represented like this, our attention might shift from focusing on absolute 
+      emittors to relative emittors. Countries like Saudi Arabia, Australia, the UAE,
+      and the United States are relatively the largest emittors. This view introduces
+      a conversation about underlying causes for emissions per country. Ask yourself, 
+      why does Saudi Arabia emit so much per person? Or what might be the difference 
+      between China and India? The answers include many complex factors related to 
+      changing (industrial) economies, population sizes, technologies, conflicts, and
+      global trade patterns. For example, China and India are rapidly expanding industrial
+      powers, while their populations are simultaneously growing. Saudi Arabia on the 
+      other hand is relatively small in its population but contributes roughly 10% of 
+      the world's oil. 
+  
       </p>
 
       <section class="panel">
