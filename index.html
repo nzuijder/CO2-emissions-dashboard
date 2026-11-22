@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    >
+
+    <title>
+      Who emits, and how much per person? Greenhouse gases 1990–2024
+    </title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin
+    >
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&display=swap"
+      rel="stylesheet"
+    >
+    <link rel="stylesheet" href="styles.css">
+  </head>
+
+  <body>
+    <header>
+      <h1>Who emits, and how much per person?</h1>
+    </header>
+
+    <p class="lede" id="lede" aria-live="polite"></p>
+
+    <div class="stage">
+      <svg
+        id="map"
+        viewBox="-2.85 -1.5 5.7 2.55"
+        role="img"
+        aria-label="Cartogram of world greenhouse gas emissions"
+      ></svg>
+
+      <div class="status" id="status"></div>
+      <div class="legend" id="legend"></div>
+      <div class="tip" id="tip"></div>
+    </div>
+
+    <main class="deep">
+      <p class="intro">
+        The map above presents two data layers simultaneously: total emissions and 
+        emissions per person for each country. China's total emissions growth
+        over the 1990–2024 timeline is most extreme. The figures below emphasize 
+        the difference between absolute and relative emissions.
+        Hover above any country to find it in every view. They all follow the
+        year slider as well.
+      </p>
+
+      <div class="grid">
+        <section class="panel">
+          <h3>Population × emissions per person = total emissions</h3>
+          <svg
+            id="mek"
+            viewBox="0 0 900 340"
+            role="img"
+            aria-label="Bar chart where width is population and height is emissions per person"
+          ></svg>
+        </section>
+
+        <section class="panel">
+          <h3 id="rank-h">Biggest changes</h3>
+          <div class="seg" role="group" aria-label="Measure">
+            <button id="m-total" aria-pressed="true">Total</button>
+            <button id="m-pc" aria-pressed="false">Per person</button>
+          </div>
+          <div id="rank"></div>
+          <p class="cap" id="rank-cap"></p>
+        </section>
+      </div>
+
+      <section class="panel">
+        <div class="cards" id="cards"></div>
+        <p class="read" id="read"></p>
+      </section>
+
+      <section class="panel limits">
+        <h3>What this view leaves out</h3>
+        <ul>
+          <li>
+            <b>Where goods are made, not where they are used.</b> Emissions are
+            counted where they happen. A country that exports a lot carries
+            emissions that serve other countries’ consumers.
+          </li>
+          <li>
+            <b>Only 1990 to 2024.</b> Countries that industrialised earlier have
+            been emitting for far longer, so today’s totals say little about
+            cumulative responsibility.
+          </li>
+          <li>
+            <b>No land use and forestry.</b> This data covers fossil CO₂,
+            methane, nitrous oxide and F-gases. Land-use change is reported
+            separately by EDGAR and is not shown here.
+          </li>
+          <li>
+            <b>Averages hide inequality inside countries.</b> Per-person
+            figures are national means. Very small countries sit at the
+            extremes, which is why rankings per person only include countries
+            with at least 5 or 10 million people.
+          </li>
+          <li>
+            <b>Simplified geography.</b> The map uses coarse outlines, so the
+            smallest countries and territories are missing from the map and
+            from these views.
+          </li>
+        </ul>
+      </section>
+    </main>
+
+    <div class="tl">
+      <div class="row">
+        <button id="play" aria-label="Play timeline">▶</button>
+        <div class="year" id="year">1990</div>
+
+        <div class="sl">
+          <input
+            id="rng"
+            type="range"
+            min="1990"
+            max="2024"
+            step="1"
+            value="1990"
+            aria-label="Year"
+          >
+          <div class="ticks" id="ticks"></div>
+        </div>
+      </div>
+
+      <div class="meta">
+        <span>Jump to</span>
+        <span class="ch" id="ch"></span>
+
+        <span class="src" id="src">
+          Source: EDGAR (JRC/IEA) GHG emissions of all world countries, 2025
+          report. https://edgar.jrc.ec.europa.eu/report_2025 
+        </span>
+      </div>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="engine.js"></script>
+    <script src="views.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
