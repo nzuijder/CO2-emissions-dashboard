@@ -2,7 +2,7 @@
 
 Inputs (both live in the repository's data/ folder):
   - data/EDGAR_2025_GHG_booklet_2025.xlsx   EDGAR emissions workbook
-  - data/countries-110m.json                world map outlines (world-atlas 2.0.2)
+  - data/countries-atlas.json               world map outlines (world-atlas 2.0.2)
 
 Output:
   - js/data.js                              defines `const DATA = {...};`
@@ -17,11 +17,12 @@ import pandas as pd
 import pycountry
 
 
-ROOT = Path(__file__).resolve().parent.parent
+ROOT = Path(__file__).resolve().parent
 
 INPUT_FILE = ROOT / "data" / "EDGAR_2025_GHG_booklet_2025.xlsx"
 TOPOLOGY_FILE = ROOT / "data" / "countries-110m.json"
 OUTPUT_FILE = ROOT / "js" / "data.js"
+
 
 YEARS = list(range(1990, 2025))
 
