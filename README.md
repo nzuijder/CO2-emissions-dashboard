@@ -6,6 +6,7 @@ This repository contains an app that generates a visual datastory about global C
 
 ## Repository structure
 
+```text
 Data_vis/
 ├── data/
 │   ├── countries-110m.json
@@ -19,3 +20,4 @@ Data_vis/
 ├── build_data.py
 ├── index.html
 └── styles.css
+```
