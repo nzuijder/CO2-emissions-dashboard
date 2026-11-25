@@ -11,8 +11,8 @@ Data_vis/
 ├── data/
 │   ├── countries-110m.json
 │   ├── world-atlas-LICENSE.txt
-│   └── EDGAR_2025_GHG_booklet_2025.xlsx   ← you add this
-├── js/   (engine.js, views.js, app.js, and data.js once built)
+│   └── EDGAR_2025_GHG_booklet_2025.xlsx
+├── js/
 │   ├── app.js
 │   ├── data.js
 │   ├── engine.js
